@@ -277,8 +277,14 @@ class Parser(object):
         # them every cycle.
         if np.any(image_data):
             return timestamp, Frame(image_data, metadata=self._get_frame_metadata())
+        
+        # If a blank "gap" image is encountered, generate an empty frame (black image) of corresponding height and width to avoid 
+        # errors with ND2-files with missing frames.
+        else: 
+            empty_frame = np.zeros([height, width])
+            return timestamp, Frame(empty_frame, metadata=self._get_frame_metadata())     
 
-        raise NoImageError
+        # raise NoImageError # <-- delete?
 
     def _get_frame_metadata(self):
         """Get the metadata for one frame
