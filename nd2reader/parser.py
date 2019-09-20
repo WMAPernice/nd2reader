@@ -284,8 +284,6 @@ class Parser(object):
             empty_frame = np.zeros([height, width])
             return timestamp, Frame(empty_frame, metadata=self._get_frame_metadata())     
 
-        # raise NoImageError # <-- delete?
-
     def _get_frame_metadata(self):
         """Get the metadata for one frame
 
