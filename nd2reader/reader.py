@@ -66,7 +66,8 @@ class ND2Reader(FramesSequenceND):
             for c in self._get_possible_coords('c', c):
                 for z in self._get_possible_coords('z', z):
                     result.append(self._parser.get_image_by_attributes(t, v, c, z, y, x))
-
+        # res = np.squeeze(np.array(result, dtype=self._dtype))
+        # return np.reshape(res, ([self.sizes[i] for i in self.bundle_axes]))
         return np.squeeze(np.array(result, dtype=self._dtype))
 
     def _get_possible_coords(self, dim, default):
